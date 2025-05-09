@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dhanush Nair | Cybersecurity Professional</title>
+    <style>
+        /* Font face declarations from the provided CSS */
+        @font-face {
+            font-family: 'BerkeleyMono-Regular';
+            src: url('../fonts/BerkeleyMono-Regular.woff2') format('woff2'),
+                url('../fonts/BerkeleyMono-Regular.woff') format('woff'),
+                url('../fonts/BerkeleyMono-Regular.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'BerkeleyMono-Bold';
+            src: url('../fonts/BerkeleyMono-Bold.woff2') format('woff2'),
+                url('../fonts/BerkeleyMono-Bold.woff') format('woff'),
+                url('../fonts/BerkeleyMono-Bold.ttf') format('truetype');
+            font-weight: bold;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'BerkeleyMono-Italic';
+            src: url('../fonts/BerkeleyMono-Italic.woff2') format('woff2'),
+                url('../fonts/BerkeleyMono-Italic.woff') format('woff'),
+                url('../fonts/BerkeleyMono-Italic.ttf') format('truetype');
+            font-weight: normal;
+            font-style: italic;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'BerkeleyMono-BoldItalic';
+            src: url('../fonts/BerkeleyMono-BoldItalic.woff2') format('woff2'),
+                url('../fonts/BerkeleyMono-BoldItalic.woff') format('woff'),
+                url('../fonts/BerkeleyMono-BoldItalic.ttf') format('truetype');
+            font-weight: bold;
+            font-style: italic;
+            font-display: swap;
+        }
+        
+        :root {
+            /* Light mode variables (default) */
+            --mono-font: "BerkeleyMono-Regular", monospace;
+            --bg-main: #ffffff;
+            --text-main: #333333;
+            --text-muted: #666666;
+            --text-headings: #222222;
+            --text-title: #111111;
+            --border-subtle: #dddddd;
+            --link-static: #8ec07c; /* Gruvbox muted green */
+            --link-hover: #d3869b; /* Gruvbox muted purple */
+            --accent-primary: #3b82f6;
+            --accent-secondary: #10b981;
+            --card-bg: #ffffff;
+            --toggle-bg: #f0f0f0;
+            --toggle-icon: #333333;
+            --nav-bg: #f8f8f8;
+            --nav-border: #dddddd;
+            --tab-active-bg: #f0f0f0;
+        }
+        
+        /* Dark mode variables */
+        [data-theme="dark"] {
+            --bg-main: #121212;
+            --text-main: #e0e0e0;
+            --text-muted: #a0a0a0;
+            --text-headings: #f0f0f0;
+            --text-title: #ffffff;
+            --border-subtle: #333333;
+            --link-static: #8ec07c; /* Gruvbox muted green */
+            --link-hover: #d3869b; /* Gruvbox muted purple */
+            --accent-primary: #4299e1;
+            --accent-secondary: #38b2ac;
+            --card-bg: #1e1e1e;
+            --toggle-bg: #333333;
+            --toggle-icon: #f0f0f0;
+            --nav-bg: #1a1a1a;
+            --nav-border: #333333;
+            --tab-active-bg: #2a2a2a;
+        }
+        
+        body {
+            font-family: var(--mono-font);
+            line-height: 1.6;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            padding-top: 80px; /* Space for fixed navbar */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* Navigation tabs */
+        .nav-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: var(--nav-bg);
+            border-bottom: 1px solid var(--nav-border);
+            z-index: 1000;
+            padding: 0 2rem;
+        }
+        
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .nav-tabs li {
+            margin: 0;
+        }
+        
+        .nav-tabs a {
+            display: block;
+            padding: 1rem 1.5rem;
+            color: var(--text-main);
+            text-decoration: none;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s ease;
+            border-bottom: none;
+        }
+        
+        .nav-tabs a:hover {
+            color: var(--link-static);
+            border-bottom-color: var(--link-static);
+        }
+        
+        .nav-tabs a.active {
+            color: var(--link-static);
+            background-color: var(--tab-active-bg);
+            border-bottom-color: var(--link-static);
+        }
+        
+        /* Theme toggle button */
+        .theme-toggle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--toggle-bg);
+            border: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .theme-toggle:hover {
+            background-color: var(--link-hover);
+            color: white;
+        }
+        
+        .theme-toggle svg {
+            width: 20px;
+            height: 20px;
+            fill: none;
+            stroke: var(--toggle-icon);
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            transition: stroke 0.3s ease;
+        }
+        
+        /* Terminal-inspired header */
+        .terminal-header {
+            font-family: var(--mono-font);
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        
+        .terminal-header h1 {
+            font-size: 2.5rem;
+            letter-spacing: -1px;
+            margin-bottom: 0.5rem;
+            color: var(--text-title);
+        }
+        
+        .terminal-header p {
+            font-size: 1rem;
+            margin-top: 0;
+            color: var(--text-main);
+        }
+        
+        .contact-info {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .contact-info a {
+            margin-right: 1rem;
+        }
+        
+        /* Section styling */
+        .section {
+            margin: 3rem 0;
+            position: relative;
+            padding-top: 1rem;
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-subtle);
+            padding-bottom: 0.5rem;
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 0;
+            color: var(--text-headings);
+        }
+        
+        /* Table styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.9rem;
+        }
+        
+        th {
+            text-align: left;
+            border-bottom: 1px solid var(--border-subtle);
+            padding: 0.5rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            color: var(--text-headings);
+        }
+        
+        td {
+            padding: 0.5rem;
+            border-bottom: 1px dotted var(--border-subtle);
+            vertical-align: top;
+        }
+        
+        /* Card layout for projects */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .card {
+            border: 1px dashed var(--border-subtle);
+            padding: 1rem;
+            position: relative;
+            background-color: var(--card-bg);
+            transition: border-color 0.3s ease, transform 0.3s ease;
+        }
+        
+        .card:hover {
+            border-style: solid;
+            border-color: var(--link-hover);
+            transform: translateY(-3px);
+        }
+        
+        .card h3 {
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+            color: var(--text-headings);
+        }
+        
+        .card h3 a {
+            color: var(--link-static); /* Green color for project names */
+            border-bottom-color: var(--link-static);
+        }
+        
+        .card h3 a:hover {
+            color: var(--link-hover);
+            border-bottom-color: var(--link-hover);
+        }
+        
+        .card p {
+            font-size: 0.9rem;
+            margin-bottom: 0;
+            color: var(--text-main);
+        }
+        
+        /* Links styling */
+        a {
+            color: var(--link-static);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--border-subtle);
+            transition: all 0.2s ease;
+        }
+        
+        a:hover {
+            color: var(--link-hover);
+            border-bottom-color: var(--link-hover);
+        }
+        
+        /* Footer */
+        footer {
+            margin-top: 4rem;
+            padding-top: 1rem;
+            border-top: 1px dashed var(--border-subtle);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        /* Timeline visualization for experience */
+        .timeline {
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background-color: var(--border-subtle);
+        }
+        
+        .timeline-item {
+            margin-bottom: 1rem;
+            position: relative;
+        }
+        
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: -24px;
+            top: 6px;
+            width: 8px;
+            height: 8px;
+            background-color: var(--text-muted);
+        }
+        
+        .timeline-item.current::before {
+            background-color: var(--link-hover);
+        }
+        
+        .timeline-item h3 {
+            margin: 0;
+            font-size: 1rem;
+            color: var(--text-headings);
+        }
+        
+        .timeline-item p {
+            margin: 0.2rem 0 0;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+        
+        /* Certificate badge grid */
+        .cert-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: flex-start;
+        }
+        
+        .cert-badge {
+            border: 1px dashed var(--border-subtle);
+            padding: 1rem;
+            text-align: center;
+            font-size: 0.8rem;
+            flex: 0 0 calc(25% - 1rem);
+            min-width: 160px;
+            transition: all 0.2s ease;
+            background-color: var(--card-bg);
+        }
+        
+        .cert-badge:hover {
+            border-style: solid;
+            border-color: var(--link-hover);
+            transform: translateY(-2px);
+        }
+        
+        .cert-badge h4 {
+            margin: 0.5rem 0;
+            font-size: 0.9rem;
+            color: var(--text-headings);
+        }
+        
+        /* Skills section */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .skills-category {
+            margin-bottom: 1.5rem;
+        }
+        
+        .skills-category h3 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-headings);
+            border-bottom: 1px dotted var(--border-subtle);
+            padding-bottom: 0.3rem;
+        }
+        
+        .skills-list {
+            list-style-type: none;
+            padding-left: 0;
+            margin: 0;
+        }
+        
+        .skills-list li {
+            padding: 0.2rem 0;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+                padding-top: 70px;
+            }
+            
+            .nav-container {
+                padding: 0 1rem;
+            }
+            
+            .nav-tabs a {
+                padding: 0.8rem 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .cards-grid, .skills-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .terminal-header h1 {
+                font-size: 2rem;
+            }
+            
+            .cert-badge {
+                flex: 0 0 calc(50% - 1rem);
+            }
+            
+            .theme-toggle {
+                width: 36px;
+                height: 36px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .cert-badge {
+                flex: 0 0 100%;
+            }
+            
+            .nav-tabs a {
+                padding: 0.7rem 0.8rem;
+                font-size: 0.8rem;
+            }
+        }
+        
+        /* Experience items */
+        .experience-item {
+            margin-bottom: 2rem;
+        }
+        
+        .experience-item h3 {
+            margin: 0 0 0.5rem 0;
+            font-size: 1.1rem;
+            color: var(--text-headings);
+        }
+        
+        .experience-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+        
+        .experience-description {
+            margin-top: 0.5rem;
+        }
+        
+        .experience-description ul {
+            margin: 0;
+            padding-left: 1.5rem;
+        }
+        
+        .experience-description li {
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        /* Visually hidden text for screen readers */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+        
+        /* Reusable green text class */
+        .text-green {
+            color: var(--link-static) !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation tabs -->
+    <nav class="nav-container">
+        <div class="nav-content">
+            <ul class="nav-tabs">
+                <li><a href="#" class="active">Home</a></li>
+                <li><a href="#">Tab 1</a></li>
+                <li><a href="#">Tab 2</a></li>
+                <li><a href="#">Tab 3</a></li>
+            </ul>
+            
+            <!-- Theme toggle button -->
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                <span class="sr-only">Toggle dark mode</span>
+                <!-- Sun icon (shown in dark mode) -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="sun-icon" viewBox="0 0 24 24" style="display: none;">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+                <!-- Moon icon (shown in light mode) -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="moon-icon" viewBox="0 0 24 24">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </button>
+        </div>
+    </nav>
+    
+    <header class="terminal-header">
+        <h1>DHANUSH NAIR</h1>
+        <p>Cybersecurity professional specializing in cloud security, malware analysis, and digital forensics.</p>
+        <div class="contact-info">
+            <a href="mailto:dhanushnair37@gmail.com">dhanushnair37@gmail.com</a>
+            <a href="https://dhanushnair.com/">dhanushnair.com</a>
+            <a href="tel:+12405014627">+1-240-501-4627</a>
+        </div>
+    </header>
+    
+    <main>
+        <!-- Experience Section -->
+        <section class="section" id="experience">
+            <div class="section-header">
+                <h2 class="section-title">Experience</h2>
+            </div>
+            
+            <div class="experience-item">
+                <h3>CTF Developer @ Cloud Village</h3>
+                <div class="experience-meta">
+                    <span>Remote</span>
+                    <span>January 2025 - Present</span>
+                </div>
+                <div class="experience-description">
+                    <ul>
+                        <li>Led the design and deployment of 10+ cloud security CTF challenges in Azure, AWS and GCP, engaging 5,000+ participants at leading cybersecurity events including DEF CON, RSA, BSidesCharm, BSidesMumbai, and BSidesSF.</li>
+                        <li>Reduced infrastructure deployment overhead by 90% through Terraform and scripting for automated environment setup.</li>
+                        <li>Incorporated elements like logic flaws, sensitive data exposure, and enumeration into CTF challenges; performed QA/QC and identified 5+ issues prior to production deployment.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="experience-item">
+                <h3>Cybersecurity Intern @ Capgemini</h3>
+                <div class="experience-meta">
+                    <span>Mumbai, India</span>
+                    <span>March 2023 – Jun 2023</span>
+                </div>
+                <div class="experience-description">
+                    <ul>
+                        <li>Collaborated with cross-functional teams to integrate Qualys CMDB features, optimizing asset tracking and improving incident response times by 25%, thus bolstering overall client security posture.</li>
+                        <li>Developed and delivered a comprehensive refresher session on cybersecurity fundamentals and networking principles to a group of 25 team members, resulting in a measurable increase in knowledge retention scores by 40%.</li>
+                        <li>Assisted the GRC team in conducting quarterly compliance audits, identifying and mitigating risks tied to over $2M in critical infrastructure, which enhanced adherence to regulatory standards and strengthened organizational compliance.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="experience-item">
+                <h3>Cybersecurity Tutor @ Sansbrix</h3>
+                <div class="experience-meta">
+                    <span>Remote</span>
+                    <span>Jan 2022 – March 2022</span>
+                </div>
+                <div class="experience-description">
+                    <ul>
+                        <li>Conducted interactive cybersecurity training sessions for aspiring professionals, covering OWASP Top 10 and demos.</li>
+                        <li>Designed and curated a 20-video cybersecurity learning playlist, simplifying complex concepts for beginners.</li>
+                        <li>Mentored students in fundamental cybersecurity principles, fostering hands-on engagement through practical exercises.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Education Section -->
+        <section class="section" id="education">
+            <div class="section-header">
+                <h2 class="section-title">Education</h2>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item current">
+                    <h3>University of Maryland, College Park</h3>
+                    <p>Masters of Engineering in Cybersecurity | Expected May 2025</p>
+                    <p style="font-size: 0.85rem;">Relevant Coursework: Hacking of C and Unix binaries, Reverse Engineering, Network Security, Cloud security, Penetration Testing, Secure Software Engineering, Digital forensics and Incident Response, Threat Modeling and Cryptography.</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>SRM University</h3>
+                    <p>Bachelors in Computer Science Engineering | June 2023</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Projects Section -->
+        <section class="section" id="projects">
+            <div class="section-header">
+                <h2 class="section-title">Projects</h2>
+            </div>
+            <div class="cards-grid">
+                <div class="card">
+                    <h3><a href="https://github.com">Car Marketplace: Secure Web Application Development</a></h3>
+                    <p>Developed a secure web application for a car marketplace using C# and ASP.NET Core, implementing secure coding practices to prevent common web vulnerabilities in the OWASP Top 10.</p>
+                </div>
+                <div class="card">
+                    <h3><a href="https://github.com">Fully Homomorphic Encryption (FHE) Implementation</a></h3>
+                    <p>Implemented a Fully Homomorphic Encryption (FHE) scheme as part of a cryptography course, enabling secure computation on encrypted data without decryption.</p>
+                </div>
+                <div class="card">
+                    <h3><a href="https://github.com">Cloud Security: AWS Vulnerability Remediation</a></h3>
+                    <p>Secured a vulnerable AWS environment by identifying misconfigurations, applying security practices, and mitigating risks using AWS tools like CloudTrail, GuardDuty, Inspector, and Config to enhance threat detection, compliance, and incident response.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Occupational Highlights Section -->
+        <section class="section" id="highlights">
+            <div class="section-header">
+                <h2 class="section-title text-green">Occupational Highlights</h2>
+            </div>
+            <table>
+                <tbody>
+                    <tr>
+                        <td><strong class="text-green">Speaker at OWASP Mumbai</strong></td>
+                        <td>Presented a technical talk on malware analysis covering Windows internals, PE format, static/dynamic analysis, encryption techniques, and CTF case studies, with a live demo using industry tools.</td>
+                    </tr>
+                    <tr>
+                        <td><strong class="text-green">Member, UMD Cybersecurity Club</strong></td>
+                        <td>Actively participate in CTF challenges, enhancing practical cybersecurity skills. Contributed to the design and development of CTF challenges to educate and engage the cybersecurity community.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        
+        <!-- Certifications Section -->
+        <section class="section" id="certifications">
+            <div class="section-header">
+                <h2 class="section-title">Certifications</h2>
+            </div>
+            <div class="cert-grid">
+                <div class="cert-badge">
+                    <h4>AI for Cybersecurity</h4>
+                    <p>John Hopkins University (in progress)</p>
+                </div>
+                <div class="cert-badge">
+                    <h4>AWS Solutions Architect</h4>
+                    <p>(in progress)</p>
+                </div>
+                <div class="cert-badge">
+                    <h4>Splunk Core Certified User</h4>
+                    <p>September 2024</p>
+                </div>
+                <div class="cert-badge">
+                    <h4>Certified Ethical Hacker V12 (CEH)</h4>
+                    <p>October 2023</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Skills Section -->
+        <section class="section" id="skills">
+            <div class="section-header">
+                <h2 class="section-title">Skills</h2>
+            </div>
+            <div class="skills-container">
+                <div class="skills-category">
+                    <h3>Expertise</h3>
+                    <ul class="skills-list">
+                        <li>Blue Team</li>
+                        <li>Malware Analysis</li>
+                        <li>Packet-Level Analysis</li>
+                        <li>System-Level Forensic Analysis</li>
+                        <li>Security Protocols</li>
+                        <li>Vulnerability Analysis</li>
+                        <li>Digital Forensics</li>
+                        <li>Incident Response</li>
+                        <li>Network Traffic</li>
+                        <li>DNS</li>
+                        <li>AWS</li>
+                        <li>Microsoft 365</li>
+                        <li>SIEM</li>
+                        <li>Azure</li>
+                    </ul>
+                </div>
+                <div class="skills-category">
+                    <h3>Languages/Scripting</h3>
+                    <ul class="skills-list">
+                        <li>C</li>
+                        <li>C++</li>
+                        <li>C#</li>
+                        <li>Python</li>
+                        <li>Bash</li>
+                        <li>SQL</li>
+                        <li>Powershell</li>
+                        <li>Terraform</li>
+                    </ul>
+                </div>
+                <div class="skills-category">
+                    <h3>Security Tools/VMs</h3>
+                    <ul class="skills-list">
+                        <li>Burp Suite</li>
+                        <li>Splunk</li>
+                        <li>Ghidra</li>
+                        <li>IDA</li>
+                        <li>Pwntools</li>
+                        <li>Nessus</li>
+                        <li>Metasploit</li>
+                        <li>Qualys</li>
+                        <li>Wireshark</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="footer-links">
+            <a href="https://github.com">GitHub</a> |
+            <a href="https://linkedin.com">LinkedIn</a> |
+            <a href="mailto:dhanushnair37@gmail.com">Email</a>
+        </div>
+        <div class="footer-info">
+            © 2025 Dhanush Nair · Last updated: May 2025
+        </div>
+    </footer>
+
+    <!-- JavaScript for theme toggle -->
+    <script>
+        // Function to set theme
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            
+            // Update toggle button icons
+            const sunIcon = document.querySelector('.sun-icon');
+            const moonIcon = document.querySelector('.moon-icon');
+            
+            if (theme === 'dark') {
+                sunIcon.style.display = 'block';
+                moonIcon.style.display = 'none';
+            } else {
+                sunIcon.style.display = 'none';
+                moonIcon.style.display = 'block';
+            }
+        }
+        
+        // Function to toggle theme
+        function toggleTheme() {
+            const currentTheme = localStorage.getItem('theme') || 'light';
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            setTheme(newTheme);
+        }
+        
+        // Initialize theme based on user preference or system preference
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            
+            if (savedTheme) {
+                // Use saved theme if available
+                setTheme(savedTheme);
+            } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                // Use dark theme if system preference is dark
+                setTheme('dark');
+            } else {
+                // Default to light theme
+                setTheme('light');
+            }
+        }
+        
+        // Add event listener to toggle button
+        document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
+        
+        // Initialize theme on page load
+        document.addEventListener('DOMContentLoaded', initTheme);
+        
+        // Listen for system theme changes
+        if (window.matchMedia) {
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+                if (!localStorage.getItem('theme')) {
+                    setTheme(e.matches ? 'dark' : 'light');
+                }
+            });
+        }
+        
+        // Simple tab navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabLinks = document.querySelectorAll('.nav-tabs a');
+            
+            tabLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Remove active class from all tabs
+                    tabLinks.forEach(tab => {
+                        tab.classList.remove('active');
+                    });
+                    
+                    // Add active class to clicked tab
+                    this.classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
