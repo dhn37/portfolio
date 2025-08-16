@@ -6,22 +6,38 @@
     <title>Dhanush Nair | Cybersecurity Professional</title>
     <style>
 
-    .skills-section {
-      display: flex;
-      gap: 2rem;
-      overflow-x: auto;
-      padding: 1rem;
-      scrollbar-width: thin; /* Firefox */
-    }
+/* Make the Skills block horizontally scrollable */
+.skills-container {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;              /* <-- horizontal scroll */
+  padding: 1rem 0 .5rem;
+  flex-wrap: nowrap;             /* keep columns on one row */
+  scroll-snap-type: x proximity; /* optional: nicer snapping */
+  -webkit-overflow-scrolling: touch;
+}
 
-    .skills-section::-webkit-scrollbar {
-      height: 8px; /* horizontal scrollbar */
-    }
+/* Style the horizontal scrollbar (optional) */
+.skills-container::-webkit-scrollbar { height: 8px; }
+.skills-container::-webkit-scrollbar-thumb {
+  background: #555; border-radius: 4px;
+}
 
-    .skills-section::-webkit-scrollbar-thumb {
-      background: #555;
-      border-radius: 4px;
-    }
+/* Each column has a fixed width so it doesn't squish */
+.skills-category {
+  flex: 0 0 300px;               /* ~column width */
+  scroll-snap-align: start;
+}
+
+/* On mobile, stack vertically (no side scroll) */
+@media (max-width: 768px) {
+  .skills-container {
+    display: block;
+    overflow-x: visible;
+  }
+  .skills-category { flex: initial; }
+}
+
         /* Font face declarations from the provided CSS */
         @font-face {
             font-family: 'BerkeleyMono-Regular';
