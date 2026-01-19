@@ -441,7 +441,7 @@
             justify-content: flex-start;
         }
         
-    .cert-badge {
+        .cert-badge {
           border: 1px dashed var(--border-subtle);
           padding: 1rem;
           text-align: center;
@@ -450,14 +450,19 @@
           min-width: 160px;
           transition: all 0.2s ease;
           background-color: var(--card-bg);
+
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center; /* 👈 centers badge + text */
         }
 
         /* Creates a fixed "badge area" so every card stays same size */
-        .cert-badge img{
-          width: 120px;          /* consistent width */
-          height: 80px;          /* consistent height */
-          object-fit: contain;   /* keep full badge visible */
-          margin: 0 0 12px 0;
+        .cert-badge img {
+          width: 150px;        /* bigger */
+          height: 110px;
+          object-fit: contain;
+          margin: 12px 0 14px 0;
           display: block;
         }
         
